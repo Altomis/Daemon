@@ -1,4 +1,5 @@
 ﻿using Deamon.Models;
+using Deamon.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,10 +11,12 @@ namespace Deamon.Backup
 {
     public static class BackupLogic
     {
+        public static int ClientIdGlobal { get; private set; }
+
         public static void DoBackup(JobsClientModel fromjob)
         {
             var snaps = new List<SnapShotModel>(SnapShotManage.LoadSnapShots());
-            SnapShotModel snap;
+            SnapShotModel snap = new SnapShotModel();
             foreach (SnapShotModel item in snaps)
             {
                 if (item.JobId == fromjob.Id)
@@ -23,31 +26,30 @@ namespace Deamon.Backup
                 }
                 else 
                 {
-                    List<string> getdirs = new List<string>();// = Directory.GetDirectories(jobs.Source);
-                    List<string> getfiles = new List<string>();// = Directory.GetFiles(@"C:\Users\Polo\Desktop\testprg");
-                    foreach (string sourc in fromjob.Source)
-                    {
-                        foreach (string itt in Directory.GetDirectories(sourc))
-                            getdirs.Add(itt);
-                        foreach (string itt in Directory.GetFiles(sourc))
-                            getfiles.Add(itt);
-                    }
-                    SnapShotManage.CreateSnapShot(fromjob.Id, getdirs, getfiles, fromjob.MaxSecBackup);
+                    //List<string> getdirs = new List<string>();// = Directory.GetDirectories(jobs.Source);
+                    //List<string> getfiles = new List<string>();// = Directory.GetFiles(@"C:\Users\Polo\Desktop\testprg");
+                    //foreach (string sourc in fromjob.Source)
+                    //{
+                    //    foreach (string itt in Directory.GetDirectories(sourc))
+                    //        getdirs.Add(itt);
+                    //    foreach (string itt in Directory.GetFiles(sourc))
+                    //        getfiles.Add(itt);
+                    //}
+                    SnapShotManage.CreateSnapShot(fromjob.Id, new List<string>(), new List<string>(), fromjob.MaxSecBackup);
                 }
             }
             try
             {
                 if (fromjob.BackupType == "full")
-                    Algorithms.FullBackup();
+                    Algorithms.FullBackup(snap,fromjob);
                 else if (fromjob.BackupType == "incr")
-                    Algorithms.IncrBackup();
+                    Algorithms.IncrBackup(snap,fromjob);
                 else if (fromjob.BackupType == "diff")
-                    Algorithms.DiffBackup();
+                    Algorithms.DiffBackup(snap,fromjob);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ReportService.RunAsync(ClientIdGlobal, fromjob.BackupType, true, ex);
             }
         }
     }

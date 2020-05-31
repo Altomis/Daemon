@@ -30,6 +30,9 @@ namespace Deamon.Services
             return macAddresses;
         }
 
+
+        public static int ClientIdGlobal { get; set; } 
+
         static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -89,7 +92,7 @@ namespace Deamon.Services
                 if (klienti[i].MacAddress == GetMacAddress())
                 {
                     Console.WriteLine("{0}\t{1}\t{2}", "ID: " + klienti[i].Id, "Mac: " + klienti[i].MacAddress, "Active: " + klienti[i].Active);
-
+                    ClientIdGlobal = klienti[i].Id;
                     url = response.Headers.Location;
                     Console.WriteLine("Vaše URL je: " + url);
 

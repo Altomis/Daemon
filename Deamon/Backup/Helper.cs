@@ -1,4 +1,5 @@
-﻿using FluentFTP;
+﻿using Deamon.Models;
+using FluentFTP;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,22 @@ namespace Deamon.Backup
 {
     public static class Helper
     {
+        public static void CopyCompared(string source, string destination, SnapShotModel snap)
+        {
+            string temp = Path.Combine(destination, DateTime.UtcNow.ToString());
+            foreach (string item in Directory.GetDirectories(source))
+            {
+                if (Directory.Exists(item) == false)
+                    Directory.CreateDirectory(Path.Combine(temp, item));
+                CopyCompared(Path.Combine(temp, item), destination, snap);
+            }
+            foreach (string item in Directory.GetFiles(source))
+            {
+                if (snap.Files.Contains(item) == false)
+                    File.Copy(item, Path.Combine(destination, item));
+            }
+        }
+
 
         public static bool IsTime(DateTime data)
         {
@@ -43,10 +60,6 @@ namespace Deamon.Backup
                     }
                 }
             }
-        }
-        public static void ReportJob(int clientid,string backuptype,bool error,Exception exception)
-        {
-
         }
     }
 }

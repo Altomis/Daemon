@@ -10,7 +10,7 @@ namespace Deamon.Models
     {
         public int Id { get; set; }
         public int IdGroups { get; set; }
-        public int BackupType { get; set; }
+        public string BackupType { get; set; }
         public DateTime Time { get; set; }
         public bool IsError { get; set; }
         public string ErrorMsg { get; set; }
