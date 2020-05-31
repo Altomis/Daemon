@@ -1,0 +1,14 @@
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\Deamon.exe.config
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\Deamon.exe
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\Deamon.pdb
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\FluentFTP.dll
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\FluentFTP.xml
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\obj\Debug\Deamon.csprojAssemblyReference.cache
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\obj\Debug\Deamon.csproj.CoreCompileInputs.cache
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\obj\Debug\Deamon.csproj.CopyComplete
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\obj\Debug\Deamon.exe
+C:\Users\Polo\Desktop\Project\Deamon\Deamon\obj\Debug\Deamon.pdb
