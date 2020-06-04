@@ -38,19 +38,19 @@ namespace Deamon.Backup
                     SnapShotManage.CreateSnapShot(fromjob.Id, new List<string>(), new List<string>(), fromjob.MaxSecBackup);
                 }
             }
-            try
-            {
+            //try
+            //{
                 if (fromjob.BackupType == "full")
-                    Algorithms.FullBackup(snap,fromjob);
+                    Algorithms.FullBackup(fromjob);
                 else if (fromjob.BackupType == "incr")
                     Algorithms.IncrBackup(snap,fromjob);
                 else if (fromjob.BackupType == "diff")
                     Algorithms.DiffBackup(snap,fromjob);
-            }
-            catch (Exception ex)
-            {
-                ReportService.RunAsync(ClientIdGlobal, fromjob.BackupType, true, ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ReportService.RunAsync(ClientIdGlobal, fromjob.BackupType, true, ex);
+            //}
         }
     }
 }

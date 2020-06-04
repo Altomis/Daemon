@@ -12,24 +12,33 @@ namespace Deamon.Backup
 {
     public static class Helper
     {
-        public static void CopyCompared(string source, string destination, SnapShotModel snap)
+        public static void CopyCompared(string source, string destination, SnapShotModel snap, bool ToZip)
         {
-            string temp = Path.Combine(destination, DateTime.UtcNow.ToString());
+
+
+            //destination.Replace('/',Path.DirectorySeparatorChar);
+            string temp = Path.Combine(destination, DateTime.UtcNow.ToString().Replace(':',';').Replace(' ','_'));
+            Directory.CreateDirectory(temp);
+            //Console.WriteLine(temp);
             foreach (string item in Directory.GetDirectories(source))
             {
-                if (Directory.Exists(item) == false)
-                    Directory.CreateDirectory(Path.Combine(temp, item));
-                CopyCompared(Path.Combine(temp, item), destination, snap);
+                if (snap.Dirs.Contains(item) == false)
+                {
+                    DirectoryInfo dirinf = new DirectoryInfo(item);
+                    var temp2 = Path.Combine(temp, dirinf.Name);
+                    Directory.CreateDirectory(temp2);
+                    CopyCompared(Path.Combine(temp, item), destination, snap, false);
+                }
             }
             foreach (string item in Directory.GetFiles(source))
             {
                 if (snap.Files.Contains(item) == false)
-                    File.Copy(item, Path.Combine(destination, item));
+                    File.Copy(item, Path.Combine(temp,Path.GetFileName(item)));
             }
         }
 
 
-        public static bool IsTime(DateTime data)
+        public static bool IsTime(string data)
         {
             if (data.ToString().Substring(0, 17) == DateTime.UtcNow.ToString().Substring(0, 17))
             {

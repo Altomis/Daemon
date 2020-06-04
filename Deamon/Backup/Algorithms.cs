@@ -18,7 +18,7 @@ namespace Deamon.Backup
             {
                 for (int e = 0; e < job.Destination.Count; e++)
                 {
-                    Helper.CopyCompared(job.Source[i],job.Destination[e],snap);
+                    Helper.CopyCompared(job.Source[i],job.Destination[e],snap,job.ToZip);
                 }
             }
             SnapShotManage.SaveSnapShots(snap);
@@ -34,7 +34,7 @@ namespace Deamon.Backup
             {
                 for (int e = 0; e < job.Destination.Count; e++)
                 {
-                    Helper.CopyCompared(job.Source[i], job.Destination[e], snap);
+                    Helper.CopyCompared(job.Source[i], job.Destination[e], snap, job.ToZip);
                 }
             }
             SnapShotManage.SaveSnapShots(snap);

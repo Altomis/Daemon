@@ -40,14 +40,16 @@ namespace Deamon.Services
 
             Report newReport = new Report
             {
-                IdGroups = clientid,
+                IdGroups = 2,
                 BackupType = backuptype,
                 IsError = error,
-                ErrorMsg = Convert.ToString(exception)
+                Time = DateTime.UtcNow,
+                ErrorMsg = Convert.ToString(exception.Message)
             };
 
             url = await RegisterReportAsync(newReport);
             Console.WriteLine("Report byl úspěšně odeslán");
+            client.Dispose();
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Deamon.Backup
             {
                 string json = r.ReadToEnd();
                 List<JobsClientModel> items = JsonConvert.DeserializeObject<List<JobsClientModel>>(json);
-                foreach (JobsClientModel item in items)
-                {
-                    Console.WriteLine(item.Id);
-                }
+                //foreach (JobsClientModel item in items)
+                //{
+                //    Console.WriteLine(item.Id);
+                //}
                 return items;
             }
         }
@@ -30,7 +30,16 @@ namespace Deamon.Backup
         {
             Exists();
             var temp = new List<JobsClientModel>(LoadJobs());
-            temp.Add(model);
+            bool r = true;
+            for (int i = 0; i < temp.Count; i++)
+            {
+                if (temp[i].Id == model.Id)
+                {
+                    temp[i] = model;
+                }
+            }
+            if (r)
+                temp.Add(model);
             var json = JsonConvert.SerializeObject(temp);
             File.WriteAllText(PathToJobs, json);
         }

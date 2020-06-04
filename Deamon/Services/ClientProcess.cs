@@ -129,6 +129,7 @@ namespace Deamon.Services
             {
                 Console.WriteLine("Klient je již v databázi");
             }
+            client.Dispose();
         }
     }
 }
