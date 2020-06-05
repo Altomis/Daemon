@@ -36,6 +36,7 @@ namespace Deamon.Backup
                 if (temp[i].Id == model.Id)
                 {
                     temp[i] = model;
+                    r = false;
                 }
             }
             if (r)

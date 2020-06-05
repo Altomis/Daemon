@@ -12,5 +12,7 @@ namespace Deamon.Models
         public List<string> Dirs { get; set; }
         public List<string> Files { get; set; }
         public int TillFull { get; set; }
+        public bool IsSec { get; set; }
+        public DateTime Time { get; set; }
     }
 }

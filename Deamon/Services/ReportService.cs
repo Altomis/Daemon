@@ -33,14 +33,14 @@ namespace Deamon.Services
 
             Uri url;
 
-            for (int i = 0; i < reports.Count; i++)
-            {
-                Console.WriteLine("{0}\t{1}\t{2}\t{3}", "ID: " + reports[i].Id, "BackupType: " + reports[i].BackupType, "Error: " + reports[i].IsError, "ErrorMsg: " + reports[i].ErrorMsg);
-            }
+            //for (int i = 0; i < reports.Count; i++)
+            //{
+            //    Console.WriteLine("{0}\t{1}\t{2}\t{3}", "ID: " + reports[i].Id, "BackupType: " + reports[i].BackupType, "Error: " + reports[i].IsError, "ErrorMsg: " + reports[i].ErrorMsg);
+            //}
 
             Report newReport = new Report
             {
-                IdGroups = 2,
+                IdGroups = 8,
                 BackupType = backuptype,
                 IsError = error,
                 Time = DateTime.UtcNow,

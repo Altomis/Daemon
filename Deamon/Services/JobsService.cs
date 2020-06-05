@@ -34,7 +34,7 @@ namespace Deamon.Services
 
             //List<JobsClientModel> tempjobs = await response.Content.ReadAsAsync<List<JobsClientModel>>();
             
-            List<JobsClientModel> jobsClient = await GetJobsClientAsync("http://localhost:49497/api/jobs/getmyjobs/30");
+            List<JobsClientModel> jobsClient = await GetJobsClientAsync("http://localhost:49497/api/jobs/getmyjobs/33");
             foreach (var item in jobsClient)
             {
                 JobsManage.SaveJobs(item);

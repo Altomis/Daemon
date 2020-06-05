@@ -7,34 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
+using System.IO.Compression;
 
 namespace Deamon.Backup
 {
     public static class Helper
     {
-        public static void CopyCompared(string source, string destination, SnapShotModel snap, bool ToZip)
+        public static void CopyCompared(string source, string destination, SnapShotModel snap)
         {
-
-
+            //string finaldir = Path.Combine(destination, DateTime.UtcNow.ToString().Replace(':', ';').Replace(' ', '_'));
+            string temp = "";
             //destination.Replace('/',Path.DirectorySeparatorChar);
-            string temp = Path.Combine(destination, DateTime.UtcNow.ToString().Replace(':',';').Replace(' ','_'));
-            Directory.CreateDirectory(temp);
+            //if (ToZip)
+            //    temp = "C:\\TEMPBACKUP";
+            temp = Path.Combine(destination, DateTime.UtcNow.ToString().Replace(':', ';').Replace(' ', '_'));
+            Directory.CreateDirectory(destination);
             //Console.WriteLine(temp);
             foreach (string item in Directory.GetDirectories(source))
             {
                 if (snap.Dirs.Contains(item) == false)
                 {
                     DirectoryInfo dirinf = new DirectoryInfo(item);
-                    var temp2 = Path.Combine(temp, dirinf.Name);
+                    var temp2 = Path.Combine(destination, dirinf.Name);
                     Directory.CreateDirectory(temp2);
-                    CopyCompared(Path.Combine(temp, item), destination, snap, false);
+                    snap.Dirs.Add(item);
+                    CopyCompared(item,temp2, snap);
                 }
             }
             foreach (string item in Directory.GetFiles(source))
             {
                 if (snap.Files.Contains(item) == false)
-                    File.Copy(item, Path.Combine(temp,Path.GetFileName(item)));
+                {
+                    File.Copy(item, Path.Combine(destination, Path.GetFileName(item)));
+                    snap.Files.Add(item);
+                }
             }
+            //if(ToZip)
+            //{
+            //    ZipFile.CreateFromDirectory(temp, finaldir);
+            //}
         }
 
 
